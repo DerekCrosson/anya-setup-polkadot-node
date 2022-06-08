@@ -1,0 +1,38 @@
+{
+    "variables": {
+        "instance_size": "m4.large",
+        "ami_name": "ami-polkadot",
+        "base_ami": "ami-0fe3c508bc62c4a7d",
+        "ssh_username": "polkadot",
+        "vpc_id": "",
+        "subnet_id": ""
+    },
+    "builders": [
+    {
+        "type": "amazon-ebs",
+        "region": "eu-west-1",
+        "source_ami": "{{user `base_ami`}}",
+        "instance_type": "{{user `instance_size`}}",
+        "ssh_username": "{{user `ssh_username`}}",
+        "ssh_timeout": "20m",
+        "ami_name": "{{user `ami_name`}}",
+        "ssh_pty" : "true",
+        "vpc_id": "{{user `vpc_id`}}",
+        "subnet_id": "{{user `subnet_id`}}",
+        "tags": {
+            "Name": "Polkadot",
+            "BuiltBy": "Packer"
+        }
+    }
+    ],
+    "description": "AWS Polkadot Image",
+    "provisioners": [
+        {
+        "type": "shell",
+        "inline": [
+            "sudo apt-get update -y",
+            "sudo apt install git"
+        ]
+        }
+    ]
+}
