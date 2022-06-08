@@ -1,5 +1,6 @@
-- name: Install Git
+- name: Install Git, Clone and run Polkadot node
   hosts: all
 
   roles:
     - git
+    - polkadot

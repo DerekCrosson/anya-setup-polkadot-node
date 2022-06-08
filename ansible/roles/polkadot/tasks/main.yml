@@ -1,0 +1,19 @@
+- name: Create directory to clone Polkadot repo
+  file:
+    path: /polkadot/node
+    state: directory
+    mode: '0755'
+
+- name: Clone Polkadot
+  git:
+    repo: https://github.com/paritytech/polkadot.git
+    dest: /polkadot/node
+
+- name: Run initialisation script and build Polkadot binary
+  shell: |
+      cd polkadot
+      ./scripts/init.sh
+      cargo build --release
+
+- name: Run Polkadot
+  shell: ./target/release/polkadot --name "Derek's Polkadot Node"
