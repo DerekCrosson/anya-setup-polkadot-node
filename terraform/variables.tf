@@ -1,3 +1,3 @@
-variable "availability_zone" {
+variable "region" {
   default = "eu-west-1"
 }
