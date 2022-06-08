@@ -2,7 +2,7 @@
     "variables": {
         "instance_size": "m4.large",
         "ami_name": "ami-polkadot",
-        "base_ami": "ubuntu/images/*ubuntu-xenial-20.04-amd64-server-*",
+        "base_ami": "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*",
         "ssh_username": "polkadot",
         "aws_account_id": "put account id here",
         "aws_access_key": "put access key here",
