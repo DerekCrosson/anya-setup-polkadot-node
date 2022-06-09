@@ -9,4 +9,7 @@
 - name: Install Rust
   shell: |
     /tmp/sh.rustup.rs -y
-    [ -f ~/.cargo/env ] && source $HOME/.cargo/env
+
+- name: Source Cargo
+  shell: |
+    echo eport PATH="$HOME/.cargo/bin:$PATH" >> $HOME/.bashrc
