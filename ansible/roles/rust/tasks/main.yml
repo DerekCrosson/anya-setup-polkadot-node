@@ -8,5 +8,5 @@
 
 - name: Install Rust
     shell: |
-        /tmp/sh.rustup.rs -y
-        [ -f ~/.cargo/env ] && source $HOME/.cargo/env
+      /tmp/sh.rustup.rs -y
+      [ -f ~/.cargo/env ] && source $HOME/.cargo/env
