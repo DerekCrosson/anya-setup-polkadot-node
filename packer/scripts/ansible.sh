@@ -4,5 +4,5 @@ sudo apt -y update && sudo apt-get -y upgrade
 sudo apt -y install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
 
-sudo apt -y clean && sudo apt -y update
+sudo apt -y update
 sudo apt -y install ansible
