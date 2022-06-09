@@ -4,7 +4,7 @@
         "ami_name": "ami-polkadot",
         "base_ami_name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
         "ssh_username": "polkadot",
-        "aws_account_id": "put account id here",
+        "ami_owner_account_id": "099720109477",
         "aws_access_key": "put access key here",
         "aws_secret_key": "put secret key here"
     },
@@ -21,7 +21,7 @@
                 "block-device-mapping.volume-type": "gp2",
                 "root-device-type": "ebs"
             },
-            "owners": ["{{user `aws_account_id`}}"],
+            "owners": ["{{user `ami_owner_account_id`}}"],
             "most_recent": true
         },
         "instance_type": "{{user `instance_size`}}",
