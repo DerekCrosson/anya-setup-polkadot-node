@@ -7,6 +7,6 @@
     force: 'yes'
 
 - name: Install Rust
-    shell: |
-      /tmp/sh.rustup.rs -y
-      [ -f ~/.cargo/env ] && source $HOME/.cargo/env
+  shell: |
+    /tmp/sh.rustup.rs -y
+    [ -f ~/.cargo/env ] && source $HOME/.cargo/env
