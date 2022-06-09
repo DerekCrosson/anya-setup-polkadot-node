@@ -1,3 +1,4 @@
+---
 - name: Create directory to clone Polkadot repo
   file:
     path: /polkadot/node
