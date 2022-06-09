@@ -19,8 +19,6 @@
                 "virtualization-type": "hvm",
                 "architecture": "x86_64",
                 "name": "{{user `base_ami_name`}}",
-                "block-device-mapping.volume-type": "gp2",
-                "block-device-mapping.delete-on-termination": false,
                 "root-device-type": "ebs"
             },
             "owners": ["{{user `ami_owner_account_id`}}"],
