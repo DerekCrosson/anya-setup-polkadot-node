@@ -4,15 +4,17 @@
     path: /polkadot/node
     state: directory
     mode: '0755'
+  become: yes
 
 - name: Clone Polkadot
   git:
     repo: https://github.com/paritytech/polkadot.git
     dest: /polkadot/node
+  become: yes
 
 - name: Run initialisation script and build Polkadot binary
   shell: |
-      cd polkadot
+      cd polkadot/node
       ./scripts/init.sh
       cargo build --release
 
