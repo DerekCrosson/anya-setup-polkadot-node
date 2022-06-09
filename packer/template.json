@@ -2,7 +2,7 @@
     "variables": {
         "instance_size": "m4.large",
         "ami_name": "ami-polkadot",
-        "base_ami_name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server--20220606",
+        "base_ami_name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
         "ssh_username": "polkadot",
         "aws_account_id": "put account id here",
         "aws_access_key": "put access key here",
@@ -16,7 +16,9 @@
         "source_ami_filter": {
             "filters": {
                 "virtualization-type": "hvm",
+                "architecture": "x86_64",
                 "name": "{{user `base_ami`}}",
+                "block-device-mapping.volume-type": "gp2",
                 "root-device-type": "ebs"
             },
             "owners": ["{{user `aws_account_id`}}"],
