@@ -14,11 +14,11 @@
 
 - name: Run initialisation script and build Polkadot binary
   shell: |
-      cd polkadot/node && ./scripts/init.sh
+      sudo cd polkadot/node && sudo ./scripts/init.sh
   
 - name: Build Polkadot binary
   shell: |
-    cargo build --release
+    sudo cargo build --release
 
 - name: Run Polkadot
   shell: ./target/release/polkadot --name "Derek's Polkadot Node"
