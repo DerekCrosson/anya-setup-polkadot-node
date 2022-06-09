@@ -17,7 +17,7 @@
             "filters": {
                 "virtualization-type": "hvm",
                 "architecture": "x86_64",
-                "name": "{{user `base_ami`}}",
+                "name": "{{user `base_ami_name`}}",
                 "block-device-mapping.volume-type": "gp2",
                 "root-device-type": "ebs"
             },
