@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
-apt -y update && apt-get -y upgrade
-apt -y install software-properties-common
-apt-add-repository ppa:ansible/ansible
+sudo apt -y update && sudo apt-get -y upgrade
+sudo apt -y install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
 
-apt -y update
-apt -y install ansible
+sudo apt -y update
+sudo apt -y install ansible
