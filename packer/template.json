@@ -42,8 +42,6 @@
         "type": "ansible-local",
         "playbook_file": "../ansible/node.yml",
         "role_paths": [
-          "../ansible/roles/git",
-          "../ansible/roles/rust",
           "../ansible/roles/polkadot"
         ],
         "group_vars": "../ansible/group_variables"
