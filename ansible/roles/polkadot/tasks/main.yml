@@ -1,28 +1,22 @@
 ---
-- name: Create directory to clone Polkadot repo
-  file:
-    path: /polkadot/node
-    state: directory
-    mode: '0755'
-  become: yes
-
-- name: Clone Polkadot
-  git:
-    repo: https://github.com/paritytech/polkadot.git
-    dest: /polkadot/node
-  become: yes
-
-- name: Switch to the polkadot installation directory
+- name: Import the security@parity.io GPG key
   shell: |
-      cd /polkadot/node
+    sudo gpg --recv-keys --keyserver hkps://keys.mailvelope.com 9D4B2B6EB8F97156D19669A9FF0812D491B96798
+    sudo gpg --export 9D4B2B6EB8F97156D19669A9FF0812D491B96798 | sudo tee /usr/share/keyrings/parity.gpg
 
-- name: Run initialisation script
+- name: Add the Parity repository and update the package index
   shell: |
-      ./scripts/init.sh  
-  
-- name: Build Polkadot binary
-  shell: |
-    sudo cargo build --release
+    echo 'deb [signed-by=/usr/share/keyrings/parity.gpg] https://releases.parity.io/deb release main' | sudo tee /etc/apt/sources.list.d/parity.list
+    sudo apt update
 
-- name: Run Polkadot
-  shell: ./target/release/polkadot --name "Derek's Polkadot Node"
+- name: Install the `parity-keyring` package to ensure that the GPG key used by apt remains up-to-date
+  shell: sudo apt install parity-keyring
+
+- name: Install Polkadot
+  shell: sudo apt install polkadot
+
+- name: Enable Polkadot systemd service
+  shell: sudo systemctl enable polkadot
+
+- name: Start Polkadot systemd service
+  shell: sudo systemctl start polkadot
