@@ -14,7 +14,7 @@
 
 - name: Run initialisation script and build Polkadot binary
   shell: |
-      sudo cd polkadot/node && sudo ./scripts/init.sh
+      cd polkadot/node && sudo ./scripts/init.sh
   
 - name: Build Polkadot binary
   shell: |
