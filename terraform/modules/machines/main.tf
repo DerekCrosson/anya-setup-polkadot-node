@@ -2,8 +2,8 @@ data "aws_ami" "polkadot_image" {
   most_recent = true
   owners = ["self"]
   filter {                       
-    name = "tag:Polkadot"     
-    values = ["polkadot"]
+    name = "name"     
+    values = ["ami-polkadot"]
   }                              
 }
 
