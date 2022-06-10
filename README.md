@@ -10,22 +10,22 @@ In this repo three tools are used:
 
 ### Bake Amazon Machine Image
 ```
-packer build template.json
+make packer-build
 ```
 
 ### Generate infrastructure plan
 ```
-terraform plan
+make terraform-plan
 ```
 
 ### Provision infrastructure
 ```
-terraform apply --auto-approve
+make terraform-apply
 ```
 
-## Destroy infrastructure (canno be undone)
+## Destroy infrastructure (cannot be undone)
 ```
-terraform destroy
+make terraform-destroy
 ```
 
 ### Things I still need to get to:
