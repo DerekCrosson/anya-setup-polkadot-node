@@ -1,5 +1,5 @@
-variable "availability_zone" {
-  default = "eu-west-1c"
+variable "image_filter_name_value" {
+  default = "ami-polkadot"
 }
 
 variable "instance_size" {

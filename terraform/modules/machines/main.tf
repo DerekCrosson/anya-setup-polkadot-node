@@ -1,10 +1,10 @@
 data "aws_ami" "polkadot_image" {
   most_recent = true
-  owners = ["self"]
-  filter {                       
-    name = "name"     
-    values = ["ami-polkadot"]
-  }                              
+  owners      = ["self"]
+  filter {
+    name      = "name"
+    values    = ["${ var.image_filter_name_value }"]
+  }
 }
 
 resource "aws_instance" "polkadot_node" {
