@@ -6,10 +6,14 @@ variable "instance_size" {
   default = "m4.large"
 }
 
-variable "instance_size" {
-  default = 40
-}
-
 variable "tag_name" {
   default = "polkadot"
+}
+
+variable "subnet_id" {
+  type = string
+}
+
+variable "vpc_security_group_ids" {
+  type = list(string)
 }
