@@ -1,4 +1,5 @@
 resource "aws_vpc" "polkadot" {
+  cidr_block              = "${ var.cidr_block }"
   enable_dns_hostnames    = true
 
   tags = {
@@ -7,6 +8,7 @@ resource "aws_vpc" "polkadot" {
 }
 
 resource "aws_subnet" "polkadot" {
+  cidr_block = "${cidrsubnet(aws_vpc.polkadot.cidr_block, 3, 1)}"
   vpc_id                  = "${ aws_vpc.polkadot.id }"
   availability_zone       = var.availability_zone
   

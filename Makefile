@@ -7,6 +7,9 @@ terraform-plan:
 terraform-apply:
 	cd terraform && terraform apply --auto-approve && cd ..
 
+terraform-destroy:
+	cd terraform && terraform destroy --auto-approve && cd ..
+
 packer-build:
 	cd packer && packer build template.json && cd ..
 
