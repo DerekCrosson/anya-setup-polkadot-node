@@ -106,7 +106,7 @@ variable "volumes" {
     "polkadot-rpc-node-1" = {
       size              = "100"
       type              = "gp2"
-      availability_zone = "eu-west-1c"
+      availability_zone = "eu-west-1a"
       tags = {
         Name        = "rpc-node-1"
       }
