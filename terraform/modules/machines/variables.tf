@@ -40,7 +40,7 @@ variable "subnet_id" {
 
 variable "nodes" {
   type = map(object({
-    tags              = map(string)
+  tags = map(string)
   }))
   default = {
     "polkadot-boot-node-primary" = {
@@ -72,6 +72,12 @@ variable "nodes" {
 }
 
 variable "volumes" {
+  type = map(object({
+    size              = string
+    type              = string
+    availability_zone = string
+    tags              = map(string)
+  }))
   default = {
     "polkadot-boot-node-primary" = {
       size              = "40"
