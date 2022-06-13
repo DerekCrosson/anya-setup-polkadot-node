@@ -7,5 +7,5 @@ variable "cidr_block" {
 }
 
 variable "vpc_name_tag" {
-  default = "node"
+  default = "polkadot"
 }
