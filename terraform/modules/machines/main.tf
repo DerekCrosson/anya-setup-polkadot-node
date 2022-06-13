@@ -15,7 +15,7 @@ data "aws_ami" "polkadot_image" {
 }
 
 resource "aws_instance" "polkadot_node" {
-  for_each = {for k, v in var.nodes : k => v}
+  for_each = {for k, v in merge(var.boot_nodes, var.collator_nodes, var.rpc_nodes) : k => v}
     ami                         = "${ data.aws_ami.polkadot_image.id }"
     instance_type               = "${ var.instance_size }"
     availability_zone           = "${ var.availability_zone }"
@@ -74,7 +74,7 @@ resource "aws_elb" "load_balancer" {
     instance_protocol  = "http"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = aws_acm_certificate.ssl_certificate.id #"arn:aws:iam::123456789012:server-certificate/certName"
+    ssl_certificate_id = aws_acm_certificate.ssl_certificate.id
   }
 
   health_check {
@@ -94,9 +94,8 @@ resource "aws_elb" "load_balancer" {
     Name = "polkadot-rpc-nodes-load-balancer"
   }
 }
-
 resource "aws_elb_attachment" "load_balancer_attachment" {
-  for_each = aws_ebs_volume.data_disk
-    elb      = aws_elb.load_balancer.id
-    instance = aws_instance.polkadot_node[each.key].id
+  for_each = var.rpc_nodes
+      elb      = aws_elb.load_balancer.id
+      instance = aws_instance.polkadot_node[each.key].id
 }

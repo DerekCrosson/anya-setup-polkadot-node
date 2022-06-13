@@ -38,7 +38,7 @@ variable "subnet_id" {
 #   type = list(string)
 # }
 
-variable "nodes" {
+variable "boot_nodes" {
   type = map(object({
   tags = map(string)
   }))
@@ -52,12 +52,28 @@ variable "nodes" {
       tags = {
         Name        = "secondary-boot-node"
       }
-    },
+    }
+  }
+}
+
+variable "collator_nodes" {
+  type = map(object({
+  tags = map(string)
+  }))
+  default = {
     "polkadot-collator-node" = {
       tags = {
         Name        = "collator-node"
       }
-    },
+    }
+  }
+}
+
+variable "rpc_nodes" {
+  type = map(object({
+  tags = map(string)
+  }))
+  default = {
     "polkadot-rpc-node-1" = {
       tags = {
         Name        = "rpc-node-1"
