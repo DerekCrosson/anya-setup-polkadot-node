@@ -34,11 +34,7 @@ resource "aws_ebs_volume" "data_disk" {
 
 resource "aws_volume_attachment" "volume_attachment" {
   for_each    = aws_ebs_volume.data_disk
-    device_name     = contains(["polkadot-boot-node-primary",
-                                "polkadot-boot-node-secondary",
-                                "polkadot-collator-node",
-                                "polkadot-rpc-node-1",
-                                "polkadot-rpc-node-2"], each.key) ? "/dev/sdf" : "/dev/sdg"
+    device_name     = "${ var.device_name }"
     volume_id       = each.value.id
     instance_id     = aws_instance.polkadot_node[each.key].id
 }
