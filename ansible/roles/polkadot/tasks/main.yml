@@ -15,8 +15,14 @@
 - name: Install Polkadot
   shell: sudo apt install polkadot
 
+- name: Create Polkadot systemd service file
+  template:
+    src: boot_node.service
+    dest: /etc/systemd/system/polkadot.service
+    owner: root
+    group: root
+    mode: 0600
+  become: yes
+
 - name: Enable Polkadot systemd service
   shell: sudo systemctl enable polkadot
-
-- name: Start Polkadot systemd service
-  shell: sudo systemctl start polkadot

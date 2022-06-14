@@ -1,0 +1,22 @@
+[Service]
+User=polkadot
+Group=polkadot
+
+ExecStart=/usr/local/bin/polkadot \
+  --name=derek-collator
+  --collator
+  --ws-port 9944
+  --chain=rococo
+  --listen-addr=/ip4/0.0.0.0/tcp/30334
+  --public-addr=/ip4/0.0.0.0/tcp/30334
+  --execution=wasm
+  --rpc-methods=unsafe
+  --execution=wasm
+  --listen-addr=/ip4/0.0.0.0/tcp/30333
+  --public-addr=/ip4/0.0.0.0/tcp/30333
+
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
