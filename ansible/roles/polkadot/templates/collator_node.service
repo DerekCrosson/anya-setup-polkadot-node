@@ -2,7 +2,7 @@
 User=polkadot
 Group=polkadot
 
-ExecStart=/usr/local/bin/polkadot \
+ExecStart=/usr/bin/polkadot \
   --name=derek-collator
   --collator
   --ws-port 9944
