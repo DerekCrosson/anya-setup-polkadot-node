@@ -2,11 +2,11 @@ module "networking" {
   source = "./modules/networking"
 }
 
-module "security" {
-  source = "./modules/security"
+# module "security" {
+#   source = "./modules/security"
 
-  vpc_id = module.networking.vpc_id
-}
+#   vpc_id = module.networking.vpc_id
+# }
 
 module "machines" {
   source = "./modules/machines"

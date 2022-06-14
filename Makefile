@@ -13,5 +13,5 @@ terraform-destroy:
 packer-build:
 	cd packer && packer build template.json && cd ..
 
-deploy-polkadot-node:
+deploy-polkadot-nodes:
 	make packer-build && make terraform-apply
