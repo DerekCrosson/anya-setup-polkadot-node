@@ -168,9 +168,9 @@ resource "aws_elb" "load_balancer" {
 
   listener {
     instance_port     = 30333
-    instance_protocol = "http"
+    instance_protocol = "tcp"
     lb_port           = 80
-    lb_protocol       = "http"
+    lb_protocol       = "tcp"
   }
 
   # listener {
@@ -185,7 +185,7 @@ resource "aws_elb" "load_balancer" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:30333/"
+    target              = "TCP:30333"
     interval            = 30
   }
 
