@@ -5,18 +5,42 @@ locals {
   }
 }
 
-data "aws_ami" "polkadot_image" {
+data "aws_ami" "polkadot_boot_node_image" {
   most_recent = true
   owners      = ["self"]
   filter {
     name      = "name"
-    values    = ["${ var.image_filter_name_value }"]
+    values    = ["${ var.boot_image_filter_name_value }"]
+  }
+}
+
+data "aws_ami" "polkadot_collator_node_image" {
+  most_recent = true
+  owners      = ["self"]
+  filter {
+    name      = "name"
+    values    = ["${ var.collator_image_filter_name_value }"]
+  }
+}
+
+data "aws_ami" "polkadot_rpc_node_image" {
+  most_recent = true
+  owners      = ["self"]
+  filter {
+    name      = "name"
+    values    = ["${ var.rpc_image_filter_name_value }"]
   }
 }
 
 resource "aws_instance" "polkadot_node" {
   for_each = {for k, v in merge(var.boot_nodes, var.collator_nodes, var.rpc_nodes) : k => v}
-    ami                         = "${ data.aws_ami.polkadot_image.id }"
+    ami                         = contains([
+                                    "polkadot-boot-node-primary",
+                                    "polkadot-boot-node-secondary"
+                                  ], each.key) ? "${ data.aws_ami.polkadot_boot_node_image.id }": (
+                                    contains([
+                                      "polkadot-collator-node"
+                                    ], each.key) ? "${ data.aws_ami.polkadot_collator_node_image.id }" : "${ data.aws_ami.polkadot_rpc_node_image.id }")
     instance_type               = "${ var.instance_size }"
     availability_zone           = each.value.availability_zone
     associate_public_ip_address = true
@@ -33,11 +57,12 @@ resource "aws_security_group" "polkadot_all_nodes" {
 }
 
 resource "aws_security_group_rule" "all_nodes_rule" {
-  type            = "ingress"
-  from_port       = 30333
-  to_port         = 30334
-  protocol        = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  for_each = toset(var.all_node_ports)
+    type            = "ingress"
+    from_port       = each.key
+    to_port         = each.key
+    protocol        = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = "${aws_security_group.polkadot_all_nodes.id}"
 }
@@ -141,14 +166,14 @@ resource "aws_elb" "load_balancer" {
   # }
 
   listener {
-    instance_port     = 8000
+    instance_port     = 30333
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
   }
 
   # listener {
-  #   instance_port      = 8000
+  #   instance_port      = 30333
   #   instance_protocol  = "http"
   #   lb_port            = 443
   #   lb_protocol        = "https"
@@ -159,7 +184,7 @@ resource "aws_elb" "load_balancer" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "HTTP:8000/"
+    target              = "HTTP:30333/"
     interval            = 30
   }
 

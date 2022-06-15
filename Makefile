@@ -11,7 +11,7 @@ terraform-destroy:
 	cd terraform && terraform destroy --auto-approve && cd ..
 
 packer-build:
-	cd packer && packer build template.json && cd ..
+	cd packer && packer build boot_node_template.json && packer build collator_node_template.json && packer build rpc_node_template.json && cd ..
 
 deploy-polkadot-nodes:
 	make packer-build && make terraform-apply

@@ -2,4 +2,4 @@
   hosts: all
 
   roles:
-    - polkadot
+    - polkadot_rpc_node

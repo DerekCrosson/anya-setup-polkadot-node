@@ -1,13 +1,13 @@
 {
     "variables": {
         "instance_size": "m4.large",
-        "ami_name": "ami-polkadot",
+        "ami_name": "ami-polkadot-collator-node",
         "base_ami_name": "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*",
         "ssh_username": "ubuntu",
         "temporary_key_pair_type": "ed25519",
         "ami_owner_account_id": "099720109477",
         "aws_access_key": "put access key here",
-        "aws_secret_key": "put secret key here"
+        "aws_secret_key": "put secret here"
     },
     "builders": [{
         "type": "amazon-ebs",
@@ -38,9 +38,9 @@
       },
       {
         "type": "ansible-local",
-        "playbook_file": "../ansible/node.yml",
+        "playbook_file": "../ansible/collator_node.yml",
         "role_paths": [
-          "../ansible/roles/polkadot"
+          "../ansible/roles/polkadot_collator_node"
         ],
         "group_vars": "../ansible/group_variables"
       },
@@ -52,7 +52,7 @@
     "post-processors": [
         [
             {
-            "output": "manifest.json",
+            "output": "collator_node_manifest.json",
             "strip_path": true,
             "type": "manifest"
             }

@@ -1,5 +1,13 @@
-variable "image_filter_name_value" {
-  default = "ami-polkadot"
+variable "boot_image_filter_name_value" {
+  default = "ami-polkadot-boot-node"
+}
+
+variable "collator_image_filter_name_value" {
+  default = "ami-polkadot-collator-node"
+}
+
+variable "rpc_image_filter_name_value" {
+  default = "ami-polkadot-rpc-node"
 }
 
 variable "instance_size" {
@@ -154,6 +162,10 @@ variable "cidr_block" {
   default = "172.26.0.0/16"
 }
 
+variable "all_node_ports" {
+  default = ["30333", "30334"]
+}
+
 variable "collator_node_ports" {
   default = ["9933", "9944"]
 }
@@ -163,6 +175,6 @@ variable "rpc_node_ports" {
 }
 
 variable "public_key" {
-  default = "put key here"
+  default = "put ssh key here"
 }
 
