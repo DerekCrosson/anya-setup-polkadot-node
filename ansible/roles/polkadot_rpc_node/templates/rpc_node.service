@@ -9,7 +9,7 @@ ExecStart=/usr/bin/polkadot \
   --unsafe-ws-external
   --rpc-cors=all
   --chain=rococo
-  --base-path=/db
+  --base-path=/dev/sdh/polkadot/db
   --listen-addr=/ip4/0.0.0.0/tcp/30334
   --public-addr=/ip4/0.0.0.0/tcp/30334
   --execution=wasm
