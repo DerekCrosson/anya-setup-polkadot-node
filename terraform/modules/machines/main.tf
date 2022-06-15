@@ -158,6 +158,7 @@ resource "aws_volume_attachment" "volume_attachment" {
 resource "aws_elb" "load_balancer" {
   name               = "polkadot-rpc-nodes-load-balancer"
   availability_zones = ["eu-west-1a", "eu-west-1c"]
+  security_groups = [aws_security_group.polkadot_all_nodes.id, aws_security_group.polkadot_rpc_nodes.id]
 
   # access_logs {
   #   bucket        = "logs"
