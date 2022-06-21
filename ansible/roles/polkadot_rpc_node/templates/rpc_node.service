@@ -18,7 +18,7 @@ ExecStart=/usr/bin/polkadot \
   --listen-addr=/ip4/0.0.0.0/tcp/30333
   --public-addr=/ip4/0.0.0.0/tcp/30333
   --rpc-methods=Unsafe
-  --rpc-port=9933
+  --rpc-port=9056
   --enable-log-reloading
 
 Restart=always
