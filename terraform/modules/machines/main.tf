@@ -167,7 +167,7 @@ resource "aws_elb" "load_balancer" {
   # }
 
   listener {
-    instance_port     = 30333
+    instance_port     = 9056
     instance_protocol = "tcp"
     lb_port           = 80
     lb_protocol       = "tcp"
@@ -185,7 +185,7 @@ resource "aws_elb" "load_balancer" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 3
-    target              = "TCP:30333"
+    target              = "TCP:9056"
     interval            = 30
   }
 
@@ -202,4 +202,13 @@ resource "aws_elb_attachment" "load_balancer_attachment" {
   for_each = var.rpc_nodes
       elb      = aws_elb.load_balancer.id
       instance = aws_instance.polkadot_node[each.key].id
+}
+
+resource "local_file" "ansible_inventory" {
+ filename = "../ansible/inventory/hosts.ini"
+ for_each = {for k, v in merge(var.boot_nodes, var.collator_nodes, var.rpc_nodes) : k => v}
+ content = <<EOF
+[webserver]
+${aws_instance.polkadot_node[each.key].id}
+EOF
 }
